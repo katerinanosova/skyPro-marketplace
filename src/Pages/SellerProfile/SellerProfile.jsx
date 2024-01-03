@@ -22,9 +22,11 @@ export const SellerProfile = () => {
   const [sellerAds, setSellerAds] = useState();
   const { data = [], isSuccess, isLoading: adsLoading } = useGetAllAdsQuery();
   const { data: allUsers = [], isSuccess: getUsersSuccess, isLoading, isError, refetch } = useGetAllUsersQuery();
+  
   if(isError) {
     refetch();
   }
+
   useEffect(() => {
     if (isSuccess) {
       setSellerAds(
@@ -43,12 +45,7 @@ export const SellerProfile = () => {
   return (
     <S.Wrapper>
       <S.Container>
-        {userLoggedIn && userLoggedIn !== 'undefined' ? (
-          <HeaderSecond />
-        ) : (
-          <Header />
-        )}
-
+        {userLoggedIn && userLoggedIn !== 'undefined' ? <HeaderSecond /> : <Header />}
         <S.Main>
           <S.MainContainer>
             <S.MainCenterBlock>
@@ -78,7 +75,7 @@ export const SellerProfile = () => {
                     <S.SellerRight>
                       {isLoading ? <S.SellerTitleLoading /> : 
                       <S.SellerTitle>
-                        {seller?.name ? seller?.name : 'Хз как зовут продавца'}
+                        {seller?.name ? seller?.name : 'Продавец решил остаться инкогнито'}
                       </S.SellerTitle>}
                       <S.SellerCity>{seller?.city}</S.SellerCity>
                       {isLoading ? <S.SellerInfLoading /> :
