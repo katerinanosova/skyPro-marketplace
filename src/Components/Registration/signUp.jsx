@@ -112,11 +112,7 @@ export const SignUp = ({ setChoiceReg }) => {
                 Зарегистрироваться
               </S.ModalBtnEnterLink>
             </SU.ModalBtnSignupEnt>
-            <SU.ModalBtnSignupEnt>
-              <S.ModalBtnEnterLink onClick={() => setChoiceReg(true)}>
-                Уже зарегистрирован
-              </S.ModalBtnEnterLink>
-            </SU.ModalBtnSignupEnt>
+            <SU.ModalReturnToSignIn onClick={() => setChoiceReg(true)} >Уже зарегистрирован?</SU.ModalReturnToSignIn>
           </SU.ModalFormLogin>
         </SU.ModalBlock>
       </SU.ContainerSignup>

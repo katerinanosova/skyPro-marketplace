@@ -19,7 +19,9 @@ import { ArrowLeftSvg } from '../../Components/ArrowLeftSvg/ArrowLeftSvg';
 import { formatPrice } from '../../helpers/price';
 import { useGetAllUsersQuery } from '../../Store/RTKQuery/getUsers';
 import { host } from '../../Api/host'
+
 export const Product = ({}) => {
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -32,14 +34,8 @@ export const Product = ({}) => {
   const { data: dataComments = [] } = useGetCommentsQuery(id);
   const { data: dataSeller = [], isError: isErrorSeller, isSuccess: isSuccessSeller, refetch: refetchSeller } = useGetAllUsersQuery();
   const [selectedImage, setSelectedImage] = useState('/img/noFoto.jpeg');
-  const {
-    data = [],
-    isError,
-    isSuccess,
-    refetch,
-  } = useGetAdvIDQuery(id);
+  const { data = [], isError, isSuccess, refetch } = useGetAdvIDQuery(id);
   const userLoggedIn = getAccessTokenLocal();
-  // может просматривать незалогиненный
   const userIsSeller = Boolean(String(data.user_id) === window.localStorage.getItem('id'));
 
   const deleteThisAdv = async () => {
@@ -52,14 +48,17 @@ export const Product = ({}) => {
       refetch()
     }
   },[isError])
-const mainUpdaiteToken = async () => {
-        await updateToken();
-        deleteThisAdv();
-        return
-}
+
+  const mainUpdaiteToken = async () => {
+    await updateToken();
+    deleteThisAdv();
+    return
+  }
+
   if(isErrorDelete && errorDelete.status === 401) {
     mainUpdaiteToken()
   }
+
   if(isSuccessDelete) {
     navigate(-1)
   }
@@ -79,11 +78,11 @@ const mainUpdaiteToken = async () => {
     }
   }, [isSuccess, data]);
 
-    useEffect(() => {
-       if(isSuccess && show2 ) {
-        setShow(true)
-      }
-      },[isSuccess, show2]);
+  useEffect(() => {
+    if(isSuccess && show2 ) {
+      setShow(true)
+    }
+  },[isSuccess, show2]);
 
 useEffect(() => {
   if(isSuccessSeller) {
@@ -166,7 +165,7 @@ if(isErrorSeller) {
                     <St.ProductCity>
                       {Boolean(data.user.city)
                         ? data.user.city
-                        : 'что нам город? Перед нами весь мир...не указан короче'}
+                        : 'Город не указан'}
                     </St.ProductCity>
                     <St.ProductReviews onClick={openReviewsModal}>
                       {dataComments.length === 0

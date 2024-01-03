@@ -6,7 +6,7 @@ export const handleEmail = (setEmail, setError, event) => {
   setEmail(trimmedValue);
   const emailValidation = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
   if (!emailValidation.test(trimmedValue)) {
-    setError('Проверяйте вводимые символы');
+    setError('Уверены ,что всё верно?');
   } else {
     setError(null);
   }
@@ -17,7 +17,7 @@ export const handlePassword = (setPassword, setErrorPass, event) => {
   setPassword(trimmedValue);
   const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
   if (!passwordValidation.test(trimmedValue)) {
-    setErrorPass('От 6 символов с заглавными, строчными буквами и цифрами');
+    setErrorPass('Не менее 6 символов; строчные, заглавные буквы и цифры');
   } else {
     setErrorPass(null);
   }
@@ -33,7 +33,7 @@ export const handleRepeatPassword = (
 ) => {
   setRepeatPassword(event.target.value);
   if (event.target.value !== password) {
-    setErrorPass('Пароли пока не совпадают');
+    setErrorPass('Пароли не совпадают');
     setPassEqual(false);
   } else {
     setErrorPass(null);

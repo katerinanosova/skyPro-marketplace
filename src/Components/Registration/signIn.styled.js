@@ -47,12 +47,11 @@ export const ModalFormLogin = styled.div`
     height: 100%;
     background-color: #ffffff;
     border-radius: 0px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 40px 20px;
+    padding-top: 95px;
   }
 `;
 export const ModalLogo = styled.div`
@@ -63,7 +62,7 @@ export const ModalLogo = styled.div`
   @media screen and (max-width: 600px) {
     width: 120px;
     height: 18px;
-    margin-bottom: 120px;
+    margin-bottom: 35px;
     background-color: transparent;
   }
 `;
@@ -250,6 +249,10 @@ export const ErrorMessage = styled.div`
   top: 70px;
   text-align: center;
   margin-top: 10px;
+
+  @media screen and (max-width: 600px) {
+    top: 130px;
+  }
 `;
 
 export const PassErrorMessage = styled(ErrorMessage)`
@@ -260,7 +263,7 @@ export const PassErrorMessage = styled(ErrorMessage)`
   @media screen and (max-width: 600px) {
     padding-right: 22px;
     padding-left: 22px;
-    top: 115px;
+    top: 180px;
   }
 `;
 

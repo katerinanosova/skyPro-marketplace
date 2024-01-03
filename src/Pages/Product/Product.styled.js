@@ -30,7 +30,6 @@ export const ProductArticle = styled.div`
 export const ProductArticleContent = styled.div`
   display: flex;
   align-items: top;
-  justify-content: center;
 
   @media screen and (max-width: 1000px) {
     display: -webkit-box;

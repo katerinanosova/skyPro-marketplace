@@ -14,6 +14,7 @@ import { CardLoader } from '../../Components/Loader/CardLoader';
 import { useGetNewTokenMutation } from '../../Store/RTKQuery/getToken';
 
 export const Profile = ({}) => {
+
   const [city, setCity] = useState('')
   const [avatar, setAvatar] = useState(null)
   const [userName, setUserName] = useState('')
@@ -27,57 +28,61 @@ export const Profile = ({}) => {
   const [changeMe, {isError: isErrorChangeMe, error: errorChangeMe, isSuccess: isSuccessChangeMe, isLoading: isLoadingChange}] = useChangeMeMutation()
   const {data: dataMyAds=[], isLoading} = useGetAllMyAdsQuery(access)
   const [refreshAllTokens, { data: dataRefresh, isSuccess: isSuccessRefresh }] = useGetNewTokenMutation();
+
   const asyncUpgate = async () => {
     await updateToken()
     await refetch()
     return
   }
-useEffect(() => {
-if(isErrorChangeMe){
-  const accessToken = getAccessTokenLocal();
-  const refreshToken = getRefreshTokenLocal();
-  refreshAllTokens({ access: accessToken, refresh: refreshToken })
-}
-},[isErrorChangeMe])
-const updateNewData = async () => {
-  await saveTokenUserLocal(dataRefresh);
-  const access = getAccessTokenLocal()
-  await handleChangeMe(access, userName, surname, phone, city, changeMe)
-}
-useEffect(() => {
-  if(isSuccessRefresh){
-    updateNewData()
-  }
-},[isSuccessRefresh])
 
   useEffect(() => {
-    if(isSuccess && !isLoadingChange) {
-      saveUserLocal(data.email, data.name, data.id)
-      profileUserData(data, setUserName, setSurname, setCity, setPhone, setAvatar)
+  if(isErrorChangeMe){
+    const accessToken = getAccessTokenLocal();
+    const refreshToken = getRefreshTokenLocal();
+    refreshAllTokens({ access: accessToken, refresh: refreshToken })
+  }
+  },[isErrorChangeMe])
+
+  const updateNewData = async () => {
+    await saveTokenUserLocal(dataRefresh);
+    const access = getAccessTokenLocal()
+    await handleChangeMe(access, userName, surname, phone, city, changeMe)
+  }
+
+  useEffect(() => {
+    if(isSuccessRefresh){
+      updateNewData()
     }
-    if(isError && error.status === 401 && error.data.detail === "Could not validate credentials: Not enough segments") {
-      asyncUpgate()
-      return
-    }
-    if(isError && error.status === 401 && error.data.detail === 'Could not validate credentials: Signature has expired') {
-      asyncUpgate()
-      return
-    }
+  },[isSuccessRefresh])
+
+  useEffect(() => {
+      if(isSuccess && !isLoadingChange) {
+        saveUserLocal(data.email, data.name, data.id)
+        profileUserData(data, setUserName, setSurname, setCity, setPhone, setAvatar)
+      }
+      if(isError && error.status === 401 && error.data.detail === "Could not validate credentials: Not enough segments") {
+        asyncUpgate()
+        return
+      }
+      if(isError && error.status === 401 && error.data.detail === 'Could not validate credentials: Signature has expired') {
+        asyncUpgate()
+        return
+      }
   }, [isSuccess, isError])
 
-useEffect(() => {
-  if(isSuccessChangeMe) {
-    setIsOpen(true);
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 2000);
-  }
-}, [isSuccessChangeMe])
+  useEffect(() => {
+    if(isSuccessChangeMe) {
+      setIsOpen(true);
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 2000);
+    }
+  }, [isSuccessChangeMe])
+
   const handleSave = async () => {
     await handleChangeMe(access, userName, surname, phone, city, changeMe);
-
   };
-  
+    
   return (
     <S.Wrapper>
       <S.Container>

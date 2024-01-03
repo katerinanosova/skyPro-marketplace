@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ContainerSignup = styled.div`
@@ -38,6 +39,10 @@ export const ModalFormLogin = styled.div`
     height: 100%;
     border-radius: 0px;
     padding: 40px 20px;
+    padding-top: 95px;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 `;
 export const ModalBtnSignupEnt = styled.div`
@@ -67,4 +72,17 @@ export const ModalBtnSignupEnt = styled.div`
     margin-bottom: 0;
   }
 `;
+
+export const ModalReturnToSignIn = styled.div`
+  cursor: pointer;
+  margin-top: 20px;
+  &:hover {
+    color: #009ee4;
+  }
+
+  @media screen and (max-width: 600px) {
+    margin-top: 15px;
+  }
+
+`
 
