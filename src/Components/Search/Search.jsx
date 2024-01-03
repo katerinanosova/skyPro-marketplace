@@ -6,9 +6,9 @@ export const Search = ({ setSearchAdv }) => {
       <S.SearchLogoDesktop>
         <S.SearchLogoDesktopIcon src='/img/logo.png' />
       </S.SearchLogoDesktop>
-      <S.SearchLogoMobile>
+      {/* <S.SearchLogoMobile>
         <S.SearchLogoMobileIcon src='/img/logo-mob.png' />
-      </S.SearchLogoMobile>
+      </S.SearchLogoMobile> */}
       <S.SearchForm>
         <S.SearchTextDesktop
           type='search'

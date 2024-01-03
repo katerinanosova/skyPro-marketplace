@@ -4,7 +4,13 @@ export const HeaderWrapper = styled.header`
   background-color: #009ee4;
 
   @media screen and (max-width: 590px) {
-    // display: none;
+    width: 100%;
+    height: 55px;
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
   }
 `;
 export const HeaderNav = styled.nav`
